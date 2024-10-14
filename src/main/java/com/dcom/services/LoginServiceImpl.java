@@ -29,11 +29,10 @@ public class LoginServiceImpl extends UnicastRemoteObject implements LoginServic
                 }
                 String token = generateToken(user);
                 if (token != null) {
-                    System.out.println("Generated JWT Token: " + token);
+                    return token;
                 } else {
                     System.out.println("Token generation failed");
                 }
-                return token;
             }
         } catch (Exception e) {
             System.out.println("An error occur while user try to log in.");
