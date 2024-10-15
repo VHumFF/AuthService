@@ -26,7 +26,7 @@ public class UserServiceImpl extends UnicastRemoteObject implements UserService 
         try{
             User user = rmiService.retrieveUser(userId);
             if(checkPassword(oldPassword, user.getPwd())){
-                user.setPwd(newPassword);
+                user.setPwd(hashPassword(newPassword));
                 return rmiService.updateUser(user);
             }
         }catch (Exception e){
@@ -34,6 +34,10 @@ public class UserServiceImpl extends UnicastRemoteObject implements UserService 
         }
 
         return false;
+    }
+
+    private String hashPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt(10));
     }
 
     private boolean checkPassword(String plainPassword, String hashedPassword) {
