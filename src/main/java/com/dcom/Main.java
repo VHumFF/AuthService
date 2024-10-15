@@ -18,17 +18,12 @@ public class Main {
             UserService userService = new UserServiceImpl();
             Registry registry = LocateRegistry.createRegistry(8080);
             registry.rebind("loginService", loginService);
-            registry.rebind("loginService", userService);
+            registry.rebind("userService", userService);
             System.out.println("Auth Service is running...");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-
-
 
     }
 }
